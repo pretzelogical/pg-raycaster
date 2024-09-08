@@ -1,5 +1,6 @@
 import pygame as pg
 from .map import GridMap
+import math
 
 
 class Player:
@@ -23,7 +24,12 @@ class Player:
         )
 
     def rotate(self, angle: float):
-        self.angle += angle
+        new_angle = self.angle + angle
+        if new_angle < 0:
+            new_angle = 360 + angle
+        elif new_angle > 360:
+            new_angle = (new_angle - self.angle) % 360
+        self.angle = new_angle
 
     def draw_2d(self, screen: pg.Surface):
         pg.draw.circle(
@@ -31,6 +37,16 @@ class Player:
             (255, 255, 255),
             self.pos,
             4
+        )
+
+        line_end = pg.Vector2()
+        line_end.x = (
+            self.pos.x * math.cos(self.angle)
+            - self.pos.y * math.sin(self.angle)
+            )
+        line_end.y = (
+            self.pos.x * math.sin(self.angle)
+            + self.pos.y * math.cos(self.angle)
         )
 
         pg.draw.line(

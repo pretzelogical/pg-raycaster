@@ -34,6 +34,8 @@ def main():
                     player.rotate(player.angle_step)
                 if event.key == pg.K_LEFT:
                     player.rotate(-player.angle_step)
+                if event.key == pg.K_r:
+                    print(player.angle)
 
         screen.blit(bg, (0, 0))
         grid_map.draw_2d(screen)
