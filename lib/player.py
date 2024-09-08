@@ -4,12 +4,15 @@ from .map import Map
 
 class Player:
     def __init__(self, map: Map):
-        self.grid_pos = pg.Vector2(map.width // 2 - 1, map.height // 2 - 1)
-        self.offset = pg.Vector2(0, 0)
-        self.map = map
+        self.pos = pg.Vector2(
+            map.width * map.block_size // 2,
+            map.height * map.block_size // 2
+        )
 
-    @property
-    def pos(self):
-        return pg.Vector2(
-            self.grid_pos.x + self.offset.x, self.grid_pos.y + self.offset.y
+    def draw_2d(self, screen: pg.Surface):
+        pg.draw.circle(
+            screen,
+            (255, 255, 255),
+            (self.pos.x, self.pos.y),
+            32
         )
