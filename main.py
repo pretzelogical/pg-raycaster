@@ -26,6 +26,7 @@ def main():
             if event.type == pg.QUIT:
                 running = False
         screen.blit(bg, (0, 0))
+        map.draw_2d(screen)
         pg.display.flip()
         clock.tick(60)
 
